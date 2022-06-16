@@ -7,3 +7,5 @@
 * 4.) Test Data Preparation with Domain Experts
 ## Model Training
 
+## Notes
+Since this project had been run on the internal serval, its bash files have not been shared in this repository
