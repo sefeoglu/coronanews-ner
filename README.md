@@ -16,7 +16,9 @@ Two domain experts annotated 2000 sentences from the text data and its Fleiss ka
 
 ## Model Training
 
-
-
+## Notes
+Since this project had been run on the internal serval, its bash files have not been shared in this repository
+=======
 ## References:
 [1] Wang, X., Song, X., Li, B., Guan, Y., Han, J.: Comprehensive named entity recognition on cord-19 with distant or weak supervision (2020)
+
