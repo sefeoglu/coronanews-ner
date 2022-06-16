@@ -1,0 +1,10 @@
+/data/*
+/src/.ipynb_checkpoints
+.DS_Store
+.ipynb_checkpoints
+/src/*.sh
+*.txt
+*.out
+*.zip
+*.sh
+*.json
