@@ -9,8 +9,6 @@ The sample sentence:
 
 sample_sentence_en = '''Lauterbach: Omikron is not suitable as a vaccine substitute Federal Health Minister Karl Lauterbach refers to a study from South Africa on Twitter, according to which an Omikron infection in unvaccinated people hardly protects against a disease with the delta variant .'''
 
-
-
 model = SequenceTagger.load(model_path)
 
 sentence = Sentence(sample_sentence_en)
