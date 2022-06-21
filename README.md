@@ -7,7 +7,7 @@
 The sample sentence:
 ````python
 
-sample_sentence_en = '''Lauterbach: Omikron is not suitable as a vaccine substitute Federal Health Minister Karl Lauterbach refers to a study from South Africa on Twitter, according to which an Omikron infection in unvaccinated people hardly protects against a disease with the delta variant .'''
+sample_sentence_en = '''Lauterbach: Omicron is not suitable as a vaccine substitute Federal Health Minister Karl Lauterbach refers to a study from South Africa on Twitter, according to which an Omicron infection in unvaccinated people hardly protects against a disease with the delta variant .'''
 
 model = SequenceTagger.load(model_path)
 
