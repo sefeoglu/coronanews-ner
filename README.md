@@ -1,4 +1,4 @@
-# A NER model for Corona News
+# A NER model for corona news
 
 
 
