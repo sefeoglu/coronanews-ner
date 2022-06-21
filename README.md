@@ -1,8 +1,5 @@
 # Fine-Grained Named Entities for Corona News
 
-![Word Cloud](word_cloud.png?raw=true "Named Entities")
-
-
 
 The sample sentence:
 ````python
