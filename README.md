@@ -32,6 +32,20 @@ Span[38:39]: "disease" → DISEASE_OR_SYNDROME (0.851)
 Span[41:43]: "delta variant" → CORONAVIRUS (0.9608)
 ````
 
+````
+sentence = """ How many people want to use the app?
+2463.74,"According to the ARD Germany trend from June, 42 percent of those surveyed would use such a warning app on their own smartphone, while 39 percent would not."""
+````
+Output:
+```
+Span[2:3]: "people" → GROUP (1.0)
+Span[9:10]: "2463.74" → CARDINAL (0.9356)
+Span[14:15]: "ARD" → ORG (0.9996)
+Span[15:16]: "Germany" → GPE (0.9995)
+Span[18:19]: "June" → DATE (0.9871)
+Span[20:22]: "42 percent" → PERCENT (0.9954)
+Span[37:39]: "39 percent" → PERCENT (1.0)
+```
 
 
 ## Data Preparation
