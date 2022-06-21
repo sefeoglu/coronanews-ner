@@ -1,4 +1,4 @@
-# A NER model for corona news
+# Fine-Grained Named Entities for Corona News
 
 
 
