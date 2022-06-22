@@ -31,7 +31,7 @@ Span[41:43]: "delta variant" → CORONAVIRUS (0.9608)
 
 ````python
 sentence = """ How many people want to use the app?
-2463.74,"According to the ARD Germany trend from June, 42 percent of those surveyed would use such a warning app on their own smartphone, while 39 percent would not."""
+2463.74, According to the ARD Germany trend from June, 42 percent of those surveyed would use such a warning app on their own smartphone, while 39 percent would not."""
 ````
 Output:
 ```
