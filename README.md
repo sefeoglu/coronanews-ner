@@ -12,8 +12,8 @@ sentence = Sentence(sample_sentence_en)
 
 model.predict(sentence)
 
-for span in sentence.get_spans("ner"):
-  print(span)
+for entity in sentence.get_spans("ner"):
+  print(entity)
 ````
 Output:
 ````
