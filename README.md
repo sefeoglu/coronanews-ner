@@ -49,7 +49,4 @@ Span[37:39]: "39 percent" → PERCENT (1.0)
 
 The usage is available [here](https://github.com/sefeoglu/coronanews-ner/blob/master/src/viz/A_NER_Model_for_Corona__News.ipynb)
 
-=======
-## References:
-[1] Wang, X., Song, X., Li, B., Guan, Y., Han, J.: Comprehensive named entity recognition on cord-19 with distant or weak supervision (2020)
 
