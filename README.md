@@ -1,5 +1,5 @@
 # Fine-Grained Named Entities for Corona News
-The work in this repository has been published at the SWAT4HCLS conference 2023, Basel, Switzerlands on February 15, 2023.
+The work in this repository had been presented at the SWAT4HCLS conference 2023, Basel, Switzerlands on February 15, 2023.
 
 The presentation is available [here](https://repository.publisso.de/resource/frl%3A6440380) and paper will be available soon at the inproceedings of the conference.
 
