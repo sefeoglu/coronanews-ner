@@ -52,4 +52,4 @@ Span[37:39]: "39 percent" → PERCENT (1.0)
 The usage is available [here](https://github.com/sefeoglu/coronanews-ner/blob/master/src/viz/A_NER_Model_for_Corona__News.ipynb)
 
 ## Note:
-The code base will be updated after publishing the results in a conference. Thanks for your understanding :nerd_face:
+The NER model is [here](https://drive.google.com/file/d/1R6WVbynZK81J_aeBkRyTu2koHTf4hTpF/view?usp=sharing)
