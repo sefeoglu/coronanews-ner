@@ -1,55 +1,114 @@
 # Fine-Grained Named Entities for Corona News
-The work in this repository had been presented at the SWAT4HCLS conference 2023, Basel, Switzerlands on February 15, 2023.
 
-The presentation is available [here](https://repository.publisso.de/resource/frl%3A6440380) and paper will be available soon at the inproceedings of the conference.
+This repository contains a fine-grained named entity recognition (NER) model for coronavirus-related news. It uses [Flair](https://github.com/flairNLP/flair) sequence taggers and a BIO-formatted corpus derived from Tagesschau news data.
 
-The sample sentence:
-````python
+The work was presented at the [SWAT4HCLS 2023 conference](https://repository.publisso.de/resource/frl%3A6440380) in Basel, Switzerland, on February 15, 2023.
 
-sample_sentence_en = '''Lauterbach: Omicron is not suitable as a vaccine substitute Federal Health Minister Karl Lauterbach refers to a study from South Africa on Twitter, according to which an Omicron infection in unvaccinated people hardly protects against a disease with the delta variant .'''
+## What it recognizes
 
-model = SequenceTagger.load(model_path)
+In addition to common entity types such as `PERSON`, `ORG`, `GPE`, `DATE`, `CARDINAL`, and `PERCENT`, the corpus includes domain-specific labels such as:
 
-sentence = Sentence(sample_sentence_en)
+- `CORONAVIRUS`
+- `DISEASE_OR_SYNDROME`
+- `GROUP`
+- `FAC`
+- `PRODUCT`
+
+The complete label set is defined by the corpus tag dictionary when a model is trained.
+
+## Quick start: run inference
+
+Install Flair in a Python environment:
+
+```bash
+python -m pip install flair
+```
+
+Download the trained model from [Google Drive](https://drive.google.com/file/d/1R6WVbynZK81J_aeBkRyTu2koHTf4hTpF/view?usp=sharing), extract it, and pass the path to `SequenceTagger.load`:
+
+```python
+from flair.data import Sentence
+from flair.models import SequenceTagger
+
+model = SequenceTagger.load("/path/to/model/best-model.pt")
+sentence = Sentence(
+  "Lauterbach: Omicron is not suitable as a vaccine substitute. "
+  "Federal Health Minister Karl Lauterbach refers to a study from South Africa."
+)
 
 model.predict(sentence)
-
 for entity in sentence.get_spans("ner"):
   print(entity)
-````
-Output:
-````
-Span[0:1]: "Lauterbach" → PERSON (0.9999)
-Span[2:3]: "Omicron" → CORONAVIRUS (1.0)
-Span[8:9]: "vaccine" → PRODUCT (0.9746)
-Span[13:15]: "Karl Lauterbach" → PERSON (0.9997)
-Span[20:22]: "South Africa" → GPE (0.9675)
-Span[23:24]: "Twitter" → ORG (0.9986)
-Span[29:31]: "Omicron infection" → DISEASE_OR_SYNDROME (0.9965)
-Span[32:34]: "unvaccinated people" → GROUP (0.998)
-Span[38:39]: "disease" → DISEASE_OR_SYNDROME (0.851)
-Span[41:43]: "delta variant" → CORONAVIRUS (0.9608)
-````
-
-````python
-sentence = """ How many people want to use the app?
-2463.74, According to the ARD Germany trend from June, 42 percent of those surveyed would use such a warning app on their own smartphone, while 39 percent would not."""
-````
-Output:
-```
-Span[2:3]: "people" → GROUP (1.0)
-Span[9:10]: "2463.74" → CARDINAL (0.9356)
-Span[14:15]: "ARD" → ORG (0.9996)
-Span[15:16]: "Germany" → GPE (0.9995)
-Span[18:19]: "June" → DATE (0.9871)
-Span[20:22]: "42 percent" → PERCENT (0.9954)
-Span[37:39]: "39 percent" → PERCENT (1.0)
 ```
 
+Example predictions include `Omicron -> CORONAVIRUS`, `Karl Lauterbach -> PERSON`, `South Africa -> GPE`, and `Twitter -> ORG`. Predictions and confidence scores depend on the downloaded model and input text.
 
-## Demo
+## Dataset format
 
-The usage is available [here](https://github.com/sefeoglu/coronanews-ner/blob/master/src/viz/A_NER_Model_for_Corona__News.ipynb)
+The training scripts expect a corpus directory containing three files:
 
-## Note:
-The NER model is [here](https://drive.google.com/file/d/1R6WVbynZK81J_aeBkRyTu2koHTf4hTpF/view?usp=sharing)
+```text
+corpus/
+├── train.txt
+├── dev.txt
+└── test.txt
+```
+
+Each file uses one token and one BIO tag per line. Blank lines separate sentences:
+
+```text
+Schleswig-Holstein    B-GPE
+,                      O
+vaccine                B-FAC
+centers                I-FAC
+
+```
+
+The checked-in example data is under [`data/tagesschau/test`](data/tagesschau/test). The training scripts require `train.txt` and `dev.txt` alongside `test.txt`; provide those splits before starting a training run.
+
+## Train a model
+
+The scripts accept the same positional arguments:
+
+```text
+python script.py CORPUS_PATH OUTPUT_PATH LEARNING_RATE BATCH_SIZE EPOCHS DOWN_SAMPLING
+```
+
+For example:
+
+```bash
+python src/model/base_model_train.py \
+  data/tagesschau  \
+  models/glove  \
+  0.1 32 10 1.0
+```
+
+Available training variants are:
+
+| Script | Description |
+| --- | --- |
+| [`base_model_train.py`](src/model/base_model_train.py) | Flair sequence tagger with GloVe embeddings |
+| [`model_train.py`](src/model/model_train.py) | Sequence tagger with GloVe and Flair embeddings |
+| [`finetuning_hunflair.py`](src/model/finetuning_hunflair.py) | Fine-tunes the `hunflair-disease` tagger |
+| [`finetuning_ontonotes.py`](src/model/finetuning_ontonotes.py) | Fine-tunes `flair/ner-english-ontonotes` |
+
+Training downloads the embeddings or base model used by the selected script. The required resources and GPU support are managed by Flair and PyTorch; larger runs may require substantial memory.
+
+## Demo and analysis
+
+- Interactive demo: [`A_NER_Model_for_Corona__News.ipynb`](src/viz/A_NER_Model_for_Corona__News.ipynb)
+- Inter-annotator agreement calculation: [`fleiss_kappa.py`](src/analysis/fleiss_kappa.py)
+
+## Repository layout
+
+```text
+data/       Annotated Tagesschau data
+src/model/  Model training and fine-tuning scripts
+src/analysis/Agreement analysis
+src/plots/  Plotting utilities
+src/viz/    Notebook demo
+```
+
+## Citation and links
+
+For the presentation, see the [SWAT4HCLS 2023 record](https://repository.publisso.de/resource/frl%3A6440380). The trained model is available [here](https://drive.google.com/file/d/1R6WVbynZK81J_aeBkRyTu2koHTf4hTpF/view?usp=sharing).
