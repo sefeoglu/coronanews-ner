@@ -1,5 +1,10 @@
 # Fine-Grained Named Entities for Corona News
 
+[![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Flair](https://img.shields.io/badge/Flair-NLP-0F766E?logoColor=white)](https://github.com/flairNLP/flair)
+[![PyTorch](https://img.shields.io/badge/PyTorch-framework-EE4C2C?logo=pytorch&logoColor=white)](https://pytorch.org/)
+[![Jupyter](https://img.shields.io/badge/Jupyter-notebook-F37626?logo=jupyter&logoColor=white)](https://jupyter.org/)
+
 This repository contains a fine-grained named entity recognition (NER) model for coronavirus-related news. It uses [Flair](https://github.com/flairNLP/flair) sequence taggers and a BIO-formatted corpus derived from Tagesschau news data.
 
 The work was presented at the [SWAT4HCLS 2023 conference](https://repository.publisso.de/resource/frl%3A6440380) in Basel, Switzerland, on February 15, 2023.
